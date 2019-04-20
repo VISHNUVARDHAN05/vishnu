@@ -1,0 +1,66 @@
+FOR LOOP:
+
+
+SQL> declare
+  2  sum1 integer:=0;
+  3  n integer:=&n;
+  4  i number:=0;
+  5  begin
+  6  for i in 1..n loop
+  7  sum1:= sum1 + i;
+  8  end loop;
+  9  dbms_output.put_line('Sum of n natural numbers='|| sum1);
+ 10  end;
+ 11  /
+Enter value for n: 10
+old   3: n integer:=&n;
+new   3: n integer:=10;
+Sum of n natural numbers=55
+
+PL/SQL procedure successfully completed.
+
+WHILE LOOP:
+
+SQL> declare
+  2  sum1 integer:=0;
+  3  n integer:=&n;
+  4  i number:=0;
+  5  begin
+  6  while i<=n loop
+  7  sum1:= sum1 + i;
+  8  i:=i+1;
+  9  end loop;
+ 10  dbms_output.put_line('Sum of n natural numbers='|| sum1);
+ 11  end;
+ 12  /
+Enter value for n: 10
+old   3: n integer:=&n;
+new   3: n integer:=10;
+Sum of n natural numbers=55
+
+PL/SQL procedure successfully completed.
+
+LOOP:
+
+SQL> declare
+  2  sum1 integer:=0;
+  3  n integer:=&n;
+  4  i number:=0;
+  5  begin
+  6  loop
+  7  if i>n then
+  8  EXIT;
+  9  end if;
+ 10  sum1:= sum1 + i;
+ 11  i:=i+1;
+ 12  end loop;
+ 13  dbms_output.put_line('Sum of n natural numbers='|| sum1);
+ 14  end;
+ 15  /
+Enter value for n: 10
+old   3: n integer:=&n;
+new   3: n integer:=10;
+Sum of n natural numbers=55
+
+PL/SQL procedure successfully completed.
+

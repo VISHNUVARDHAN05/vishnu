@@ -1,0 +1,91 @@
+1.> Write a query to display pname of all records. Sort all records by pname. (use order by clause)
+
+SQL> select pname from products1;
+
+PNAME
+--------
+d17786
+pen
+pencil
+modem
+dvd
+mouse
+
+6 rows selected.
+sorting in descending format
+
+SQL> select pname from products1 order by pname DESC;
+
+PNAME
+--------
+pencil
+pen
+mouse
+modem
+dvd
+d17786
+
+6 rows selected.
+2.> query to display cname and ccity of all records. Sort by ccity in descending order
+
+SQL> select cname,ccity from customers order by ccity DESC;
+
+CNAME      CCITY
+---------- --------
+mohan      tirupati
+rohan      pune
+gopal      mysore
+sanjay     mysore
+haitwik    kolkata
+samhita    kolkata
+rajini     chennai
+
+7 rows selected.
+
+3.> query to display saledt and total sale on the date
+
+SQL> select saledt,sum(sale) from salesdetails1 group by saledt;
+
+SALEDT     SUM(SALE)
+--------- ----------
+01-SEP-16         76
+18-MAR-17         20
+20-DEC-16         30
+14-JUL-17         10
+4.> query to display saledt and total sale on the date labeled as sale of all items
+
+SQL> select saledt,sum(sale) as "sale of all items" from salesdetails1 group by saledt;
+
+
+SALEDT    sale of all items
+--------- ----------
+01-SEP-16         76
+18-MAR-17         20
+20-DEC-16         30
+14-JUL-17         10
+5.> query to display saledt and total sale on the date sold after 01-sep-2016.
+
+SQL> select saledt,sum(sale) as "totalsales" from salesdetails1 where saledt>'01-sep-16' group by saledt;
+
+SALEDT    totalsales
+--------- ----------
+18-MAR-17         20
+20-DEC-16         30
+14-JUL-17         10
+6.> query to display saledt and total sale on the date labeled as sale of all items other than DVD.
+
+SQL> select saledt,sum(sale) as "totalsales" from salesdetails1 where pid<>'p4' group by saledt;
+
+SALEDT    totalsales
+--------- ----------
+01-SEP-16         61
+18-MAR-17         20
+20-DEC-16         30
+7.> display total number of customers who purchase pen.
+
+SQL> select count(cid) from salesdetails1 where pid='p1' group by cid;
+
+COUNT(CID)
+----------
+         1
+

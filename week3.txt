@@ -1,0 +1,77 @@
+SQL> DESC STATES;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- --------------------
+
+ CITY                                               VARCHAR2(10)
+ STATE                                              VARCHAR2(15)
+
+SQL> ALTER TABLE STATES ADD CONSTRAINT CITY_PK PRIMARY KEY(CITY);
+
+Table altered.
+
+SQL> DESC STATES;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------
+
+ CITY                                      NOT NULL VARCHAR2(10)
+ STATE                                              VARCHAR2(15)
+ 
+ 1.PRIMARY KEY IS TESTED.
+ 
+ SQL> INSERT INTO STATES(CITY,STATE) VALUES('NEWDELHI','UTTARAPRADESH');
+
+1 row created.
+
+SQL> INSERT INTO STATES (CITY,STATE) VALUES('NEWDELHI','UTTARAPRADESH');
+INSERT INTO STATES (CITY,STATE) VALUES('NEWDELHI','UTTARAPRADESH')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (CSE16121A05J3.CITY_PK) violated
+
+2.UNIQUE TESSTING
+SQL> ALTER TABLE PRODUCTS ADD CONSTRAINT PID_UK UNIQUE (PNAME);
+
+Table altered.
+SQL> INSERT INTO PRODUCTS(PID,PNAME) VALUES('P6','PEN');
+INSERT INTO PRODUCTS(PID,PNAME) VALUES('P6','PEN')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (CSE16121A05J3.PID_UK) violated
+
+3.CHECK CONSTRSAINT
+SQL> ALTER TABLE PRODUCTS ADD CONSTRAINT PK_COST  CHECK(PROFIT>10);
+ALTER TABLE PRODUCTS ADD CONSTRAINT PK_COST  CHECK(PROFIT>10)
+                                    *
+ERROR at line 1:
+ORA-02293: cannot validate (CSE16121A05J3.PK_COST) - check constraint violated
+3.DEFAULT
+SQL> ALTER TABLE PRODUCTS MODIFY PROFIT  DEFAULT(20);
+
+Table altered.
+SQL> INSERT INTO PRODUCTS(PID,PNAME,PCOST) VALUES('P6','CD',200);
+
+1 row created.
+SQL> SELECT *FROM PRODUCTS;
+
+PID    PNAME           PCOST     PROFIT
+------ ---------- ---------- ----------
+P6     CD                200         20
+P1     PEN               100         10
+P2     PENCIL           15.5          2
+P3     MODEM             950         50
+P4     DVD                35          5
+P5     MOUSE           500.5
+
+6 rows selected.
+
+
+4.FOREIGNKEY
+SQL> ALTER TABLE SALESDETAILS ADD FOREIGN KEY (CID) REFERENCES CUSTOMERS(CID);
+
+Table altered.
+SQL> ALTER TABLE CUSTOMERS DROP(CID);
+ALTER TABLE CUSTOMERS DROP(CID)
+                           *
+ERROR at line 1:
+ORA-12992: cannot drop parent key column
+

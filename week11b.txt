@@ -1,0 +1,24 @@
+Calling 
+
+SQL> create or replace FUNCTION maximum
+  2  return number IS
+  3  z number(10,5):=0;
+  4  begin
+  5  select max(pcost) into z from products1;
+  6  return z;
+  7  end;
+  8  /
+
+Function created.
+
+calling a function
+SQL> declare
+  2  max1 number(10,5);
+  3  begin
+  4  max1 :=maximum();
+  5  dbms_output.put_line(max1);
+  6  end;
+  7  /
+950
+
+PL/SQL procedure successfully completed.

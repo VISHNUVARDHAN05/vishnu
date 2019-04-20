@@ -1,0 +1,188 @@
+I. Write a query to display system date
+
+SQL> select sysdate from dual;
+
+SYSDATE
+---------
+01-MAR-19
+
+II. Write a query to display the system date by rounding it to next month.
+
+SQL> select round(to_date('28-feb-19'),'month') from dual;
+
+ROUND(TO_
+---------
+01-MAR-19
+
+III. Write a query to display the system date by
+rounding it to next year.
+
+SQL> select round(add_months(sysdate,6),'year') from dual;
+
+ROUND(ADD
+---------
+01-JAN-20
+
+IV. Write a query to display the last date of the
+system date.
+
+SQL> select last_day(sysdate) from dual;
+
+LAST_DAY(
+---------
+31-MAR-19
+
+V. Write a query to display the next date of system date which is Friday.
+
+SQL> select next_day(sysdate,'friday') from dual;
+
+NEXT_DAY
+---------
+08-MAR-19
+
+VI. Write a query to display sale date and date after 02 months from sale date.
+SQL> select saledt,add_months(saledt,2) from salesdetails1;
+
+SALEDT    ADD_MONTH
+--------- ---------
+01-SEP-16 01-NOV-16
+18-MAR-17 18-MAY-17
+01-SEP-16 01-NOV-16
+01-SEP-16 01-NOV-16
+20-DEC-16 20-FEB-17
+14-JUL-17 14-SEP-17
+01-SEP-16 01-NOV-16
+
+7 rows selected.
+
+VII. Write a query to display system date, sale date and months between two dates.
+
+SQL> select saledt,sysdate,round(months_between(sysdate,saledt)) from salesdetails1;
+
+SALEDT    SYSDATE   ROUND(MONTHS_BETWEEN(SYSDATE,SALEDT))
+--------- --------- -------------------------------------
+01-SEP-16 01-MAR-19                                    30
+18-MAR-17 01-MAR-19                                    23
+01-SEP-16 01-MAR-19                                    30
+01-SEP-16 01-MAR-19                                    30
+20-DEC-16 01-MAR-19                                    26
+14-JUL-17 01-MAR-19                                    20
+01-SEP-16 01-MAR-19                                    30
+
+7 rows selected.
+
+VIII. Write a query to display the greatest date between sale date and system date, name it as BIG, also display sale date and SYSDATE.
+
+SQL> select saledt,sysdate,greatest(saledt,sysdate) as "big" from salesdetails1;
+
+SALEDT    SYSDATE   big
+--------- --------- ---------
+01-SEP-16 01-MAR-19 01-MAR-19
+18-MAR-17 01-MAR-19 01-MAR-19
+01-SEP-16 01-MAR-19 01-MAR-19
+01-SEP-16 01-MAR-19 01-MAR-19
+20-DEC-16 01-MAR-19 01-MAR-19
+14-JUL-17 01-MAR-19 01-MAR-19
+01-SEP-16 01-MAR-19 01-MAR-19
+
+IX. Write a query to display the least date between sale date and system date name it as SMALL, also display sale date and SYSDATE.
+SQL> select saledt,sysdate,least(saledt,sysdate) as "small" from salesdetails1;
+
+SALEDT    SYSDATE   small
+--------- --------- ---------
+01-SEP-16 01-MAR-19 01-SEP-16
+18-MAR-17 01-MAR-19 18-MAR-17
+01-SEP-16 01-MAR-19 01-SEP-16
+01-SEP-16 01-MAR-19 01-SEP-16
+20-DEC-16 01-MAR-19 20-DEC-16
+14-JUL-17 01-MAR-19 14-JUL-17
+01-SEP-16 01-MAR-19 01-SEP-16
+
+X. Write a query to display the product name along with the rounded value of product cost for product name is “Pencil”.
+
+SQL> select pname ,round(pcost) from products1 where pname='pencil';
+
+PNAME    ROUND(PCOST)
+-------- ------------
+pencil             16
+
+XI. Write a query to display product cost along with MOD value if divided by 5.
+SQL> select pcost,mod(pcost,5) from products1;
+
+     PCOST MOD(PCOST,5)
+---------- ------------
+       399            4
+       100            0
+      15.5           .5
+       950            0
+        35            0
+     500.5           .5
+XII. Write a query to display cname in uppercase, lowercase, titlecase from cust table where customer name is “rohan”.
+SQL> select upper(cname),lower(cname),initcap(cname) from customers where cname='rohan';
+
+UPPER(CNAM LOWER(CNAM INITCAP(CN
+---------- ---------- ----------
+ROHAN      rohan      Rohan
+
+XIII. Write a query to display all concatenated value of cname, ccity by converting cname into titlecase and ccity into uppercase.
+
+SQL> select concat(initcap(cname),upper(ccity)) from customers;
+
+CONCAT(INITCAP(CNA
+------------------
+GopalMYSORE
+HaitwikKOLKATA
+RohanPUNE
+RajiniCHENNAI
+MohanTIRUPATI
+SanjayMYSORE
+SamhitaKOLKATA
+
+XIV. Write a query to display the first 3 characters of cname.
+
+SQL> select substr(cname,0,3) from customers;
+
+SUB
+---
+gop
+hai
+roh
+raj
+moh
+san
+sam
+
+XV. Write a query to display the position of ‘m’ in the cname of the customer whose name is “samhita”.
+
+SQL> select instr(cname,'m') as position from customers where cname='samhita';
+
+  POSITION
+----------
+         3
+XVI. Write a query to display the length of all customer names.
+
+SQL> select length(cname) as length from customers;
+
+    LENGTH
+----------
+         5
+         7
+         5
+         6
+         5
+         6
+         7
+
+XVII. PAD # character in left of product cost to a total width of 5 character position.
+
+SQL> select lpad(pcost,5,'#') as lpad from products1;
+
+LPAD
+-----
+##399
+##100
+#15.5
+##950
+###35
+500.5
+

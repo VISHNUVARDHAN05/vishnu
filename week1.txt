@@ -1,0 +1,181 @@
+1.CREATE TABLES IN SALES DATABASE:
+
+SQL> create table customer(cid varchar2(6),cname varchar2(10),ccity varchar2(8));
+
+Table created.
+
+SQL> create table product(pid varchar2(6),pname varchar2(6),pcost number(5,2),pr
+ofit number(3));
+
+Table created.
+
+SQL> create table salesdetails(cid varchar2(6),pid varchar2(6),sale number(3),sa
+ledt date);
+
+Table created.
+
+SQL> create table states(ccity varchar2(8),state varchar2(15));
+
+Table created.
+
+2.VIEW STRUCTURE OF EACH TABLE:
+
+SQL> desc customer;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+
+ CID                                                VARCHAR2(6)
+ CNAME                                              VARCHAR2(10)
+ CCITY                                              VARCHAR2(8)
+
+SQL> desc product;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+
+ PID                                                VARCHAR2(6)
+ PNAME                                              VARCHAR2(6)
+ PCOST                                              NUMBER(5,2)
+ PROFIT                                             NUMBER(3)
+
+SQL> desc salesdetails;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+
+ CID                                                VARCHAR2(6)
+ PID                                                VARCHAR2(6)
+ SALE                                               NUMBER(3)
+ SALEDT                                             DATE
+
+SQL> desc states;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+
+ CCITY                                              VARCHAR2(8)
+ STATE                                              VARCHAR2(15)
+
+3.ADD NEW COLUMN TO THE TABLE:
+
+SQL> alter table states add(pincode number(6));
+
+Table altered.
+
+SQL> desc states;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+
+ CCITY                                              VARCHAR2(8)
+ STATE                                              VARCHAR2(15)
+ PINCODE                                            NUMBER(6)
+
+4.CHANGE THE WIDTH OF DATA TYPE:
+
+SQL> alter table product modify profit number(5);
+
+Table altered.
+
+SQL> desc product;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+
+ PID                                                VARCHAR2(6)
+ PNAME                                              VARCHAR2(6)
+ PCOST                                              NUMBER(5,2)
+ PROFIT                                             NUMBER(5)
+
+5.CHANGE DATATYPE OF A COLUMN:
+ 
+SQL> alter table states modify pincode varchar2(6);
+
+Table altered.
+
+SQL> desc states;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+
+ CCITY                                              VARCHAR2(8)
+ STATE                                              VARCHAR2(15)
+ PINCODE                                            VARCHAR2(6)
+
+6.DELETE COLUMN FROM TABLE:
+
+SQL> alter table states drop(pincode);
+
+Table altered.
+
+SQL> desc states;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+
+ CCITY                                              VARCHAR2(8)
+ STATE                                              VARCHAR2(15)
+
+7.RENAME COLUMN NAME:
+ 
+SQL> alter table states rename column ccity to place;
+
+Table altered.
+
+SQL> desc states;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+
+ PLACE                                              VARCHAR2(8)
+ STATE                                              VARCHAR2(15)
+
+8.RENAME TABLE NAME:
+
+SQL> rename states to Address;
+
+Table renamed.
+
+SQL> desc address;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+
+ PLACE                                              VARCHAR2(8)
+ STATE                                              VARCHAR2(15)
+
+9.DELETE ALL RECORDS STORED IN A TABLE BUT STRUCTURE OF TABLE IS RETAINED:
+
+SQL> insert into address values('tirupati','A.p');
+
+1 row created.
+
+SQL> insert into address values('krishna','A.p');
+
+1 row created.
+
+SQL> insert into address values('guntur','A.p');
+
+1 row created.
+
+SQL> select * from address;
+
+PLACE    STATE
+-------- ---------------
+tirupati A.p
+krishna  A.p
+guntur   A.p
+
+SQL> delete from address;
+
+3 rows deleted.
+
+SQL> desc address;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+
+ PLACE                                              VARCHAR2(8)
+ STATE                                              VARCHAR2(15)
+
+10.REMOVE A TABLE FROM DATABASE:
+
+SQL> drop table address;
+
+Table dropped.
+
+SQL> desc address;
+ERROR:
+ORA-04043: object address does not exist
+1M2.sql
+Displaying 1M2.sql.

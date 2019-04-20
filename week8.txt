@@ -1,0 +1,87 @@
+I. Write a query to display the total count of customer.
+
+SQL> select count(*) from customers;
+
+  COUNT(*)
+----------
+         7
+		 
+II. Write a query to display the minimum cost of product.
+
+SQL> select min(pcost) from products1;
+
+MIN(PCOST)
+----------
+      15.5
+
+III. Write a query to display average value of product cost rounded to 2nd decimal places.
+SQL> select round(avg(pcost),2) from products1;
+
+AVERAGE
+-------------------
+             333.33
+
+IV. Write a query to display product name with total sale detail in descending order.
+
+SQL> select p.pname,sum(s.sale) from products1 p,salesdetails1 s where p.pid=s.pid group by p.pname;
+
+PNAME    SUM(S.SALE)
+-------- -----------
+dvd               25
+modem             26
+pen               10
+pencil            45
+mouse             30
+
+V. Write a query to display product name, sale date and total amount collected for the product.
+SQL> select p.pname,s.saledt,sum(s.sale) from products1 p,salesdetails1 s where p.pid=s.pid group by(p.pname,s.saledt);
+
+PNAME    SALEDT    SUM(S.SALE)
+-------- --------- -----------
+pen      01-SEP-16          10
+pencil   01-SEP-16          45
+modem    18-MAR-17          20
+dvd      01-SEP-16          15
+modem    01-SEP-16           6
+mouse    20-DEC-16          30
+dvd      14-JUL-17          10
+VI Write a query to display sale date and total sale date wise which was sold after “14-jul-2016”.
+SQL> select saledt,sum(sale) from salesdetails1 where saledt>'14-jul-16' group by saledt;
+
+SALEDT     SUM(SALE)
+--------- ----------
+01-SEP-16         76
+18-MAR-17         20
+20-DEC-16         30
+14-JUL-17         10
+
+VII. Write a query to display the customer name who belongs to those places whose name is having ‘i’ or ‘p’.
+
+SQL> select cname from customers where ccity like '%i%' or ccity like '%p%';
+
+CNAME
+----------
+rohan
+rajini
+mohan
+
+VIII. Write a query to display customer name who belongs to a city whose name contains characters ‘c’ and whose name contains character ‘a’.
+
+SQL> select cname,ccity  from customers where ccity like '%c%' or ccity like'%a%';
+
+CNAME      CCITY
+---------- --------
+rajini     chennai
+
+IX. Write a query to display the customer name who does not belong to ‘pune’.
+
+SQL> select cname,ccity  from customers where ccity<>'pune';
+
+CNAME      CCITY
+---------- --------
+gopal      mysore
+haitwik    kolkata
+rajini     chennai
+mohan      tirupati
+sanjay     mysore
+samhita    kolkata

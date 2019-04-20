@@ -1,0 +1,156 @@
+1.TO DISPLAY CNAME,PNAME,SALE,SALEDT FOR ALL CUSTOMERS:
+
+SQL> select c.cname,p.pname,s.sale,s.saledt from sales_details s inner join cust
+omers c on s.cid=c.cid inner join products p on s.pid=p.pid;
+
+CNAME      PNAME            SALE SALEDT
+---------- ---------- ---------- ---------
+gopal      mouse               9 14-JUL-17
+gopal      pencil             23 01-SEP-16
+gopal      pen                10 01-SEP-16
+haitvik    modem              20 18-MAR-17
+haitvik    pen                33 14-JUL-17
+rohan      mouse              14 18-MAR-17
+rohan      DVD                 8 20-DEC-16
+rohan      modem               9 01-SEP-16
+rohan      pencil             45 01-SEP-16
+rajini     DVD                15 01-SEP-16
+rajini     pencil             50 18-MAR-17
+
+CNAME      PNAME            SALE SALEDT
+---------- ---------- ---------- ---------
+mohan      mouse              30 20-DEC-16
+mohan      pen                20 14-JUL-17
+sanjay     mouse              10 18-MAR-17
+sanjay     DVD                10 14-JUL-17
+samhita    modem               6 01-SEP-16
+samhita    modem              22 18-MAR-17
+
+17 rows selected.
+
+2.TO DISPLAY CNAME WHO HAVE PURCHASED PEN:
+
+SQL> select c.cname from sales_details s inner join customers c on c.cid=s.cid i
+nner join products p on s.pid=p.pid where p.pid='p1';
+
+CNAME
+----------
+gopal
+haitvik
+mohan
+
+3.TO DISPLAY CNAME,PNAME,SALE FOR ALL CUSTOMERS WHO SOLD AFTER "01-SEP-2016":
+
+SQL> select c.cname,p.pname,s.sale from sales_details s inner join customers c o
+n s.cid=c.cid inner join products p on s.pid=p.pid where s.saledt>'01-sep-16';
+
+CNAME      PNAME            SALE
+---------- ---------- ----------
+gopal      mouse               9
+haitvik    pen                33
+haitvik    modem              20
+rohan      DVD                 8
+rohan      mouse              14
+rajini     pencil             50
+mohan      pen                20
+mohan      mouse              30
+sanjay     mouse              10
+sanjay     DVD                10
+samhita    modem              22
+
+11 rows selected.
+
+4.TO DISPLAY CNAME,CCITY,STATE OF ALL CUSTOMERS :
+
+SQL> select c.cname,c.ccity,st.state from customers c inner join states st on st
+.ccity=c.ccity;
+
+CNAME      CCITY      STATE
+---------- ---------- --------------------
+gopal      mysore     Karnataka
+haitvik    kolkata    Westbengal
+rohan      pune       Maharashtra
+rajini     chennai    TamilNadu
+mohan      tirupathi  Andhra Pradesh
+sanjay     mysore     Karnataka
+samhita    kolkata    Westbengal
+
+7 rows selected.
+
+5.TO DISPLAY CNAME,CCITY OF ALL CUSTOMERS WHO BELONGS TO KARANATAKA:
+
+SQL> select c.cname,c.ccity from customers c inner join states st on st.ccity=c.
+ccity WHERE st.state='Karnataka';
+
+CNAME      CCITY
+---------- ----------
+gopal      mysore
+sanjay     mysore
+
+6.TO CREATE A VIEW ON PRODUCTS TABLE WHICH INCLUDES PID,PNAME AND PCOST OF PRODUCTS:
+
+SQL> create view prod_view as select pid,pname,pcost from products;
+
+View created.
+
+SQL> desc prod_view;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PID                                                VARCHAR2(6)
+ PNAME                                              VARCHAR2(9)
+ PCOST                                              NUMBER(5,2)
+ 
+7.INSERT A ROW INTO THE VIEW:
+ 
+SQL> insert into prod_view values('p6','modem',300);
+
+1 row created.
+
+SQL> select * from prod_view;
+
+PID    PNAME          PCOST
+------ --------- ----------
+p1     pen              100
+p2     pencil          15.5
+p3     pendrive         950
+p4     DVD               35
+p5     mouse          500.5
+p6     modem            300
+
+6 rows selected.
+
+8.UPDATE THE ROWS IN A VIEW:
+
+SQL> update prod_view set pcost=200 where pid='p6';
+
+1 row updated.
+
+SQL> select * from prod_view;
+
+PID    PNAME          PCOST
+------ --------- ----------
+p1     pen              100
+p2     pencil          15.5
+p3     pendrive         950
+p4     DVD               35
+p5     mouse          500.5
+p6     modem            200
+
+6 rows selected.
+
+9.DELETE THE ROWS FROM VIEW:
+
+SQL> delete from prod_view where pid='p6';
+
+1 row deleted.
+
+SQL> select * from prod_view;
+
+PID    PNAME          PCOST
+------ --------- ----------
+p1     pen              100
+p2     pencil          15.5
+p3     pendrive         950
+p4     DVD               35
+p5     mouse          500.5
+

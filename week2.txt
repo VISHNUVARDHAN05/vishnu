@@ -1,0 +1,404 @@
+I.QUERY TO DISPLAY ALL CUSTOMERS:
+SQL> create table customers(cid varchar2(20),cname varchar2(20),ccity varchar2(2
+0));
+
+Table created.
+
+SQL> insert into customers values('&cid','&cname','&ccity');
+Enter value for cid: c1
+Enter value for cname: gopal
+Enter value for ccity: mysore
+old   1: insert into customers values('&cid','&cname','&ccity')
+new   1: insert into customers values('c1','gopal','mysore')
+
+1 row created.
+
+SQL> /
+Enter value for cid: c2
+Enter value for cname: haitvik
+Enter value for ccity: kolkata
+old   1: insert into customers values('&cid','&cname','&ccity')
+new   1: insert into customers values('c2','haitvik','kolkata')
+
+1 row created.
+
+SQL> /
+Enter value for cid: c3
+Enter value for cname: rohan
+Enter value for ccity: pune
+old   1: insert into customers values('&cid','&cname','&ccity')
+new   1: insert into customers values('c3','rohan','pune')
+
+1 row created.
+
+SQL> /
+Enter value for cid: c4
+Enter value for cname: rajini
+Enter value for ccity: chennai
+old   1: insert into customers values('&cid','&cname','&ccity')
+new   1: insert into customers values('c4','rajini','chennai')
+
+1 row created.
+
+SQL> /
+Enter value for cid: c5
+Enter value for cname: mohan
+Enter value for ccity: tirupathi
+old   1: insert into customers values('&cid','&cname','&ccity')
+new   1: insert into customers values('c5','mohan','tirupathi')
+
+1 row created.
+
+SQL> /
+Enter value for cid: c6
+Enter value for cname: sanjay
+Enter value for ccity: mysore
+old   1: insert into customers values('&cid','&cname','&ccity')
+new   1: insert into customers values('c6','sanjay','mysore')
+
+1 row created.
+
+SQL> /
+Enter value for cid: c7
+Enter value for cname: samhita
+Enter value for ccity: kolkata
+old   1: insert into customers values('&cid','&cname','&ccity')
+new   1: insert into customers values('c7','samhita','kolkata')
+
+1 row created.
+
+SQL> select * from customers;
+
+CID                  CNAME                CCITY
+-------------------- -------------------- --------------------
+c1                   gopal                mysore
+c2                   haitvik              kolkata
+c3                   rohan                pune
+c4                   rajini               chennai
+c5                   mohan                tirupathi
+c6                   sanjay               mysore
+c7                   samhita              kolkata
+
+7 rows selected.
+
+2.QUERY TO DISPLAY PNAME OF ALL PRODUCTS:
+SQL> create table product(pid varchar2(20),pname varchar2(20),pcost varchar2(20)
+,profit varchar2(20));
+
+Table created.
+
+SQL> insert into product values('&pid','&pname','&pcost','&profit');
+Enter value for pid: p1
+Enter value for pname: pen
+Enter value for pcost: 100
+Enter value for profit: 10
+old   1: insert into product values('&pid','&pname','&pcost','&profit')
+new   1: insert into product values('p1','pen','100','10')
+
+1 row created.
+
+SQL> /
+Enter value for pid: p2
+Enter value for pname: pencil
+Enter value for pcost: 15.5
+Enter value for profit: 2
+old   1: insert into product values('&pid','&pname','&pcost','&profit')
+new   1: insert into product values('p2','pencil','15.5','2')
+
+1 row created.
+
+SQL> /
+Enter value for pid: p3
+Enter value for pname: pendrive
+Enter value for pcost: 950
+Enter value for profit: 50
+old   1: insert into product values('&pid','&pname','&pcost','&profit')
+new   1: insert into product values('p3','pendrive','950','50')
+
+1 row created.
+
+SQL> /
+Enter value for pid: p4
+Enter value for pname: dvd
+Enter value for pcost: 35
+Enter value for profit: 5
+old   1: insert into product values('&pid','&pname','&pcost','&profit')
+new   1: insert into product values('p4','dvd','35','5')
+
+1 row created.
+
+SQL> /
+Enter value for pid: p5
+Enter value for pname: mouse
+Enter value for pcost: 500.5
+Enter value for profit: null
+old   1: insert into product values('&pid','&pname','&pcost','&profit')
+new   1: insert into product values('p5','mouse','500.5','null')
+
+1 row created.
+
+SQL> select pname from product;
+
+PNAME
+--------------------
+pen
+pencil
+pendrive
+dvd
+mouse
+ 
+3.QUERY TO DISPLAY CNAME AND CCITY OF ALL CUSTOMERS:
+SQL> select cname,ccity from customers;
+
+CNAME                CCITY
+-------------------- --------------------
+gopal                mysore
+haitvik              kolkata
+rohan                pune
+rajini               chennai
+mohan                tirupathi
+sanjay               mysore
+samhita              kolkata
+
+7 rows selected.
+
+4.QUERY TO DISPLAY CNAME AND CCITY OF ALL CUSTOMERS WHO LIVES IN MYSORE:
+SQL> select cname,ccity from customers where ccity='mysore';
+
+CNAME                CCITY
+-------------------- --------------------
+gopal                mysore
+sanjay               mysore
+
+5.QUERY TO DISPLAY CNAME OR CCITY OF ALL CUSTOMERS WHO LIVE IN KOLKATA OR CHENNAI:
+SQL> select cname,ccity from customers where ccity='kolkata' or ccity='chennai';
+
+
+CNAME                CCITY
+-------------------- --------------------
+haitvik              kolkata
+rajini               chennai
+samhita              kolkata
+
+6.QUERY TO FIND THE COST OF THE PENCIL:
+SQL> select pcost from product where pname='pencil';
+
+PCOST
+--------------------
+15.5
+
+7.QUERY TO DISPLAY CID AS CUSTOMER_ID ,CNAME AS NAMEFORALLCUSTOMERS:
+SQL> alter table customers rename column cid to Customer_Id;
+
+Table altered.
+
+SQL> alter table customers rename column cname to Name;
+
+Table altered.
+
+8.QUERY TO CHANGE THE NAME OF THE PRODUCT P3 FROM 'PENDRIVE' TO 'MODEM':
+SQL> update product set pname='modem' where pid='p3';
+
+1 row updated.
+SQL> create table sales(cid varchar2(20),pid varchar2(20),sale varchar2(20),sale
+dt date);
+
+Table created.
+
+SQL> insert into sales values('&cid','&pid','&sale','&saledt');
+Enter value for cid: c1
+Enter value for pid: p1
+Enter value for sale: 10
+Enter value for saledt: 1-sep-16
+old   1: insert into sales values('&cid','&pid','&sale','&saledt')
+new   1: insert into sales values('c1','p1','10','1-sep-16')
+
+1 row created.
+
+SQL> /
+Enter value for cid: c2
+Enter value for pid: p3
+Enter value for sale: 20
+Enter value for saledt: 18-mar-17
+old   1: insert into sales values('&cid','&pid','&sale','&saledt')
+new   1: insert into sales values('c2','p3','20','18-mar-17')
+
+1 row created.
+
+SQL> /
+Enter value for cid: c5
+Enter value for pid: p5
+Enter value for sale: 30
+Enter value for saledt: 20-dec-16
+old   1: insert into sales values('&cid','&pid','&sale','&saledt')
+new   1: insert into sales values('c5','p5','30','20-dec-16')
+
+1 row created.
+
+SQL> /
+Enter value for cid: c3
+Enter value for pid: p2
+Enter value for sale: 45
+Enter value for saledt: 1-sep-16
+old   1: insert into sales values('&cid','&pid','&sale','&saledt')
+new   1: insert into sales values('c3','p2','45','1-sep-16')
+
+1 row created.
+
+SQL> /
+Enter value for cid: c4
+Enter value for pid: p4
+Enter value for sale: 15
+Enter value for saledt: 1-sep-16
+old   1: insert into sales values('&cid','&pid','&sale','&saledt')
+new   1: insert into sales values('c4','p4','15','1-sep-16')
+
+1 row created.
+
+SQL> /
+Enter value for cid: c7
+Enter value for pid: p3
+Enter value for sale: 22
+Enter value for saledt: 18-mar-17
+old   1: insert into sales values('&cid','&pid','&sale','&saledt')
+new   1: insert into sales values('c7','p3','22','18-mar-17')
+
+1 row created.
+
+SQL> /
+Enter value for cid: c1
+Enter value for pid: p2
+Enter value for sale: 23
+Enter value for saledt: 1-sep-16
+old   1: insert into sales values('&cid','&pid','&sale','&saledt')
+new   1: insert into sales values('c1','p2','23','1-sep-16')
+
+1 row created.
+
+SQL> /
+Enter value for cid: c2
+Enter value for pid: p1
+Enter value for sale: 33
+Enter value for saledt: 14-jul-17
+old   1: insert into sales values('&cid','&pid','&sale','&saledt')
+new   1: insert into sales values('c2','p1','33','14-jul-17')
+
+1 row created.
+
+SQL> /
+Enter value for cid: c3
+Enter value for pid: p5
+Enter value for sale: 14
+Enter value for saledt: 18-mar-17
+old   1: insert into sales values('&cid','&pid','&sale','&saledt')
+new   1: insert into sales values('c3','p5','14','18-mar-17')
+
+1 row created.
+
+SQL> /
+Enter value for cid: c6
+Enter value for pid: p4
+Enter value for sale: 10
+Enter value for saledt: 14-jul-17
+old   1: insert into sales values('&cid','&pid','&sale','&saledt')
+new   1: insert into sales values('c6','p4','10','14-jul-17')
+
+1 row created.
+
+SQL> /
+Enter value for cid: c1
+Enter value for pid: p2
+Enter value for sale: 5
+Enter value for saledt: 18-mar-17
+old   1: insert into sales values('&cid','&pid','&sale','&saledt')
+new   1: insert into sales values('c1','p2','5','18-mar-17')
+
+1 row created.
+
+SQL> /
+Enter value for cid: c4
+Enter value for pid: p2
+Enter value for sale: 50
+Enter value for saledt: 18-mar-17
+old   1: insert into sales values('&cid','&pid','&sale','&saledt')
+new   1: insert into sales values('c4','p2','50','18-mar-17')
+
+1 row created.
+
+SQL> /
+Enter value for cid: c5
+Enter value for pid: p1
+Enter value for sale: 20
+Enter value for saledt: 14-jul-17
+old   1: insert into sales values('&cid','&pid','&sale','&saledt')
+new   1: insert into sales values('c5','p1','20','14-jul-17')
+
+1 row created.
+
+SQL> /
+Enter value for cid: c3
+Enter value for pid: p3
+Enter value for sale: 9
+Enter value for saledt: 1-sep-16
+old   1: insert into sales values('&cid','&pid','&sale','&saledt')
+new   1: insert into sales values('c3','p3','9','1-sep-16')
+
+1 row created.
+
+SQL> /
+Enter value for cid: c6
+Enter value for pid: p5
+Enter value for sale: 10
+Enter value for saledt: 18-mar-17
+old   1: insert into sales values('&cid','&pid','&sale','&saledt')
+new   1: insert into sales values('c6','p5','10','18-mar-17')
+
+1 row created.
+
+SQL> /
+Enter value for cid: c3
+Enter value for pid: p4
+Enter value for sale: 8
+Enter value for saledt: 20-dec-16
+old   1: insert into sales values('&cid','&pid','&sale','&saledt')
+new   1: insert into sales values('c3','p4','8','20-dec-16')
+
+1 row created.
+
+SQL> /
+Enter value for cid: c7
+Enter value for pid: p3
+Enter value for sale: 6
+Enter value for saledt: 1-sep-16
+old   1: insert into sales values('&cid','&pid','&sale','&saledt')
+new   1: insert into sales values('c7','p3','6','1-sep-16')
+
+1 row created.
+
+SQL> /
+Enter value for cid: c1
+Enter value for pid: p5
+Enter value for sale: 9
+Enter value for saledt: 14-jul-17
+old   1: insert into sales values('&cid','&pid','&sale','&saledt')
+new   1: insert into sales values('c1','p5','9','14-jul-17')
+
+1 row created.
+
+9.QUERY TO CHANGE PRODUCT ID'S IN SALES DETAILS TABLE (ELIMINATING DUPLICATES):
+SQL> select unique(pid) from sales;
+
+PID
+--------------------
+p1
+p3
+p4
+p2
+p5
+
+10.QUERY TO REMOVE THE RECORD FROM SALES DETAIL TABLE WHOSE SALE VALUE IS 5:
+SQL> delete from sales where sale='5';
+1 row deleted.
+SQL>
+week2.txt
+Displaying week2.txt.

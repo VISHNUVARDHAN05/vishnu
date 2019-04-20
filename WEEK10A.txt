@@ -1,0 +1,27 @@
+SQL> DECLARE
+  2  p_id products.pid%type;
+  3  p_name products.pname%type;
+  4  p_cost products.pcost%type;
+  5  p_profit products.profit%type;
+  6  CURSOR p_min IS
+  7  SELECT * FROM PRODUCTS where pcost=(SELECT min(pcost) from products);
+  8  CURSOR p_max IS
+  9  SELECT * FROM PRODUCTS where pcost=(SELECT max(pcost) from products);
+ 10  BEGIN
+ 11  OPEN p_min;
+ 12  FETCH p_min INTO p_id,p_name,p_cost,p_profit;
+ 13  dbms_output.put_line('CHEAPEST PRODUCT:  pid: '||p_id||'----->pname: '||p_n
+ame||'------>pcost: '||p_cost||'------>profit: '||p_profit);
+ 14  CLOSE p_min;
+ 15  OPEN p_max;
+ 16  FETCH p_max INTO p_id,p_name,p_cost,p_profit;
+ 17  dbms_output.put_line('COSTLIEST PRODUCT:  pid: '||p_id||'----->pname: '||p_
+name||'----->pcost: '||p_cost||'----->profit: '||p_profit);
+ 18  CLOSE p_max;
+ 19  END;
+ 20  /
+CHEAPEST PRODUCT:  pid: p2----->pname: pencil------>pcost: 15.5------>profit: 2
+COSTLIEST PRODUCT:  pid: p3----->pname: pendrive----->pcost: 950----->profit: 50
+
+
+PL/SQL procedure successfully completed.

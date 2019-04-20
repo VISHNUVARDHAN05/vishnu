@@ -1,0 +1,27 @@
+SQL> CREATE OR REPLACE PROCEDURE "ADD"(a IN number,b IN number)
+  2  IS
+  3  BEGIN
+  4  dbms_output.put_line('Sum of '||a||' , '||b||' is : '||(a+b));
+  5  END;
+  6  /
+
+Procedure created.
+
+SQL> DECLARE
+  2  n1 number:=&n1;
+  3  n2 number:=&n2;
+  4  BEGIN
+  5  ADD(n1,n2);
+  6  END;
+  7  /
+  /*OUTPUT:
+Enter value for n1: 12
+old   2: n1 number:=&n1;
+new   2: n1 number:=12;
+Enter value for n2: -90
+old   3: n2 number:=&n2;
+new   3: n2 number:=-90;
+Sum of 12 , -90 is : -78
+
+PL/SQL procedure successfully completed.
+*/

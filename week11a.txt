@@ -1,0 +1,64 @@
+SQL> declare
+  2  a number;
+  3  b number;
+  4  c number;
+  5  d number;
+  6  e number;
+  7  f number;
+  8  FUNCTION add(a IN number,b IN number)
+  9  RETURN number
+ 10  is
+ 11  w number;
+ 12  begin
+ 13  w:=a+b;
+ 14  return w;
+ 15  end;
+ 16  FUNCTION sub(a IN number,b IN number)
+ 17  RETURN number
+ 18  is
+ 19  x number;
+ 20  begin
+ 21  x:=a-b;
+ 22  return x;
+ 23  end;
+ 24  FUNCTION mul(a IN number,b IN number)
+ 25  RETURN number
+ 26  is
+ 27  y number;
+ 28  begin
+ 29  y:=a*b;
+ 30  return y;
+ 31  end;
+ 32  FUNCTION div(a IN number,b IN number)
+ 33  RETURN number
+ 34  is
+ 35  z number;
+ 36  begin
+ 37  z:=a/b;
+ 38  return z;
+ 39  end;
+ 40  begin
+ 41  a:=&a;
+ 42  b:=&b;
+ 43  c:=add(a,b);
+ 44  d:=sub(a,b);
+ 45  e:=mul(a,b);
+ 46  f:=div(a,b);
+ 47  dbms_output.put_line('Addition of a and b is:'||c);
+ 48  dbms_output.put_line('Subtraction of a and b is:'||d);
+ 49  dbms_output.put_line('Multiplication of a and b is:'||e);
+ 50  dbms_output.put_line('Division of a and b is:'||f);
+ 51  end;
+ 52  /
+Enter value for a: 123
+old  41: a:=&a;
+new  41: a:=123;
+Enter value for b: 254
+old  42: b:=&b;
+new  42: b:=254;
+Addition of a and b is:377
+Subtraction of a and b is:-131
+Multiplication of a and b is:31242
+Division of a and b is:.4842519685039370078740157480314960629921
+
+PL/SQL procedure successfully completed.

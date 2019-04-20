@@ -1,0 +1,179 @@
+1.DISPLAY SUM OF PCOST AND PROFIT FROM PRODUCTS TABLE:
+SQL> select sum(pcost+ profit) as "PCOST + PROFIT"
+  2  FROM products1
+  3  ;
+
+PCOST + PROFIT
+--------------
+        1586.5
+
+
+2.DISPLAY SUM OF PCOST AND PROFIT AS SELLING PRICE FROM PRODUCTS TABLE:
+
+SQL> select sum(pcost+ profit) as "SELLING PRICE"
+  2  FROM products1;
+
+SELLING PRICE
+-------------
+       1586.5
+	   
+SQL> select profit*100/pcost from products;
+select profit*100/pcost from products
+       *
+ERROR at line 1:
+ORA-00904: "PROFIT": invalid identifier
+
+
+SQL> select profit*100/pcost from products1;
+
+PROFIT*100/PCOST
+----------------
+      5.01253133
+              10
+      12.9032258
+      5.26315789
+      14.2857143
+
+
+6 rows selected.
+
+SQL> select trunk(profit*100/pcost) from products1;
+select trunk(profit*100/pcost) from products1
+       *
+ERROR at line 1:
+ORA-00904: "TRUNK": invalid identifier
+
+
+SQL> select trunc(profit*100/pcost,2) from products1;
+
+TRUNC(PROFIT*100/PCOST,2)
+-------------------------
+                     5.01
+                       10
+                     12.9
+                     5.26
+                    14.28
+
+
+6 rows selected.
+
+SQL> select trunc(coalesce<profit,0)*100/pcost,2) from products1;
+select trunc(coalesce<profit,0)*100/pcost,2) from products1
+for null value:
+SQL> select trunc(coalesce(profit,0)*100/pcost,2) from products1;
+
+TRUNC(COALESCE(PROFIT,0)*100/PCOST,2)
+-------------------------------------
+                                 5.01
+                                   10
+                                 12.9
+                                 5.26
+                                14.28
+                                    0
+
+6 rows selected.
+
+4.cids of customers who purchasedproducts on ’14-jul-2017’.
+
+SQL> select cid from salesdetails1 where saledt='14-jul-2017'
+  2  ;
+
+CID
+------
+c2
+c5
+c1
+
+5.List only the products whose cost is more than 50.00
+
+SQL> select pname from products1 where pcost > 50.00;
+
+PNAME
+--------
+d17786
+pen
+modem
+mouse
+
+6. List all the customers who are not belongs to ‘pune’.
+
+SQL> select cname from customers where ccity<>'pune';
+
+CNAME
+----------
+gopal
+haitwik
+rajini
+mohan
+sanjay
+samhita
+
+6 rows selected.
+
+7.display the pname and pcost of all the products where pcost lies between 5 and 25.
+SQL> select pname,pcost FROM products1 where pcost BETWEEN 5 AND 25;
+
+PNAME         PCOST
+-------- ----------
+pencil         15.5
+
+8.Write a query to display distinct customer id where product id is p3 or sale date is ’18-mar-2017’.
+SQL> select cid from salesdetails1 where pid='p3';
+
+CID
+------
+c7
+c3
+c7
+
+9.Write a query to display cname, ccity of those customers whose cid is in c1 or c2 or c4 or c5(using IN operator).
+SQL> select cname,ccity from customers where cid in('c1','c2','c4','c5');
+
+CNAME      CCITY
+---------- --------
+gopal      mysore
+haitwik    kolkata
+rajini     chennai
+mohan      tirupati
+
+10.List customers whose name starts with ’h’.
+SQL> select cname from customers where cname like 'h%';
+
+CNAME
+----------
+haitwik
+
+11. Write a query to display all records of prod table in which first and third character of pname is any character and second character is ‘e’.
+SQL> select * from products1 where pname like'_e%';
+
+PID    PNAME         PCOST     PROFIT
+------ -------- ---------- ----------
+p1     pen             100         10
+p2     pencil         15.5          2
+
+12.Write a query to display all cname which includes two ‘a’ in the name.
+
+SQL> select cname from customers where cname like '%a%a%';
+
+CNAME
+----------
+sanjay
+samhita
+13.List the products with unknown profit.
+SQL> select * from products1 where profit is NULL;
+
+PID    PNAME         PCOST     PROFIT
+------ -------- ---------- ----------
+p5     mouse         500.5
+14.Display the profit of products as zero if unknown.
+SQL> select * from products1 where profit is NULL;
+
+PID    PNAME         PCOST     PROFIT
+------ -------- ---------- ----------
+p5     mouse         500.5
+15.Display unknown as 0
+SQL> select pid,pname,pcost,coalesce(profit,0) from products1 where profit is null;
+
+PID    PNAME         PCOST COALESCE(PROFIT,0)
+------ -------- ---------- ------------------
+p5     mouse         500.5                  0

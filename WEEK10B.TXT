@@ -1,0 +1,26 @@
+SQL> DECLARE
+  2  p_id sales_details.pid%type:=&pid;
+  3  total_sale sales_details.sale%type;
+  4  CURSOR t_sale IS
+  5  SELECT pid,sum(sale) from SALES_DETAILS WHERE pid= p_id  group by pid;
+  6  BEGIN
+  7  OPEN t_sale;
+  8  FETCH t_sale into p_id,total_sale;
+  9  dbms_output.put_line('pid : '||p_id||'   '||'total sale:   '||total_sale);
+ 10  CLOSE t_sale;
+ 11  END;
+ 12  /
+Enter value for pid: 'p1'
+old   2: p_id sales_details.pid%type:=&pid;
+new   2: p_id sales_details.pid%type:='p1';
+pid : p1   total sale:   63
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for pid: 'p2'
+old   2: p_id sales_details.pid%type:=&pid;
+new   2: p_id sales_details.pid%type:='p2';
+pid : p2   total sale:   123
+
+PL/SQL procedure successfully completed.
